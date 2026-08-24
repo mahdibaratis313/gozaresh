@@ -1136,4 +1136,1897 @@
 
         /* =========================================================
            واکنش‌گرایی
-        =============
+        ========================================================= */
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-column {
+                order: 2;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .app-shell {
+                width: min(100% - 20px, 1180px);
+                padding-top: 10px;
+            }
+
+            .app-header {
+                align-items: flex-start;
+                min-height: auto;
+                padding: 21px 18px;
+                border-radius: 22px;
+            }
+
+            .brand-icon {
+                width: 53px;
+                height: 53px;
+                border-radius: 16px;
+            }
+
+            .brand p {
+                display: none;
+            }
+
+            .header-actions .btn span {
+                display: none;
+            }
+
+            .header-actions .btn {
+                width: 44px;
+                padding: 8px;
+            }
+
+            .card {
+                border-radius: 22px;
+            }
+
+            .card-header,
+            .card-body {
+                padding-right: 18px;
+                padding-left: 18px;
+            }
+
+            .shift-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .history-item {
+                grid-template-columns: 1fr;
+            }
+
+            .history-actions {
+                justify-content: flex-end;
+            }
+
+            .modal-backdrop {
+                align-items: end;
+                padding: 10px;
+            }
+
+            .modal {
+                max-height: calc(100vh - 20px);
+                border-radius: 24px;
+            }
+
+            .modal-header,
+            .modal-body {
+                padding-right: 20px;
+                padding-left: 20px;
+            }
+
+            .modal-actions {
+                flex-direction: column-reverse;
+            }
+
+            .modal-actions-main {
+                display: grid;
+                width: 100%;
+                grid-template-columns: 1fr;
+                margin: 0;
+            }
+
+            .modal-actions > .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 410px) {
+            .app-header {
+                gap: 9px;
+            }
+
+            .brand {
+                gap: 10px;
+            }
+
+            .brand-icon {
+                width: 46px;
+                height: 46px;
+            }
+
+            .channel-pill {
+                max-width: 175px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .card-header {
+                align-items: flex-start;
+            }
+
+            .history-card .card-header {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-shell">
+        <!-- سربرگ برنامه -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M6.7 15.8 5.2 20l4.2-1.5 8.8-8.8a2.35 2.35 0 0 0-3.3-3.3l-8.2 9.4Z"
+                              stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path d="m13.6 7.8 3.3 3.3M4 4.5h6M4 8h4"
+                              stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <h1>گزارش‌یار ایتا</h1>
+                    <p>ثبت سریع و ارسال گزارش کار روزانه</p>
+                    <div id="channelPill" class="channel-pill hidden">
+                        <span class="status-dot"></span>
+                        <span id="channelDisplay">کانال تنظیم‌شده</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button id="openSettingsButton" class="btn btn-secondary" type="button"
+                        aria-label="ویرایش تنظیمات">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M12 15.25A3.25 3.25 0 1 0 12 8.75a3.25 3.25 0 0 0 0 6.5Z"
+                              stroke="currentColor" stroke-width="1.8"/>
+                        <path d="M19.4 13.2a7.8 7.8 0 0 0 .05-2.35l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2-1.15L14.6 3h-4l-.4 2.7a8 8 0 0 0-2 1.15l-2.5-1-2 3.45 2 1.55a7.8 7.8 0 0 0 0 2.3l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2 1.15l.4 2.7h4l.4-2.7a8 8 0 0 0 2-1.15l2.5 1 2-3.45-2.1-1.5Z"
+                              stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                    <span>ویرایش تنظیمات</span>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div class="main-grid">
+                <!-- فرم ثبت گزارش -->
+                <section class="card">
+                    <div class="card-header">
+                        <div class="card-heading">
+                            <div class="card-heading-icon">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M7 3.5h10a2 2 0 0 1 2 2v15H5v-15a2 2 0 0 1 2-2Z"
+                                          stroke="currentColor" stroke-width="1.8"/>
+                                    <path d="M8.5 8h7M8.5 12h7M8.5 16h4"
+                                          stroke="currentColor" stroke-width="1.8"
+                                          stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="card-title">ثبت گزارش جدید</h2>
+                                <p class="card-subtitle">اطلاعات گزارش روزانه را وارد کنید</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <form id="reportForm" novalidate>
+                            <!-- تاریخ -->
+                            <div class="form-section">
+                                <div class="section-label">
+                                    <span>تاریخ گزارش <span class="required-mark">*</span></span>
+                                    <span class="label-hint">تاریخ شمسی</span>
+                                </div>
+
+                                <div class="segmented-control" role="radiogroup" aria-label="نوع تاریخ">
+                                    <div>
+                                        <input class="segment-input" id="dateToday" type="radio"
+                                               name="dateMode" value="today" checked>
+                                        <label class="segment-label" for="dateToday">امروز</label>
+                                    </div>
+
+                                    <div>
+                                        <input class="segment-input" id="dateManual" type="radio"
+                                               name="dateMode" value="manual">
+                                        <label class="segment-label" for="dateManual">تاریخ دستی</label>
+                                    </div>
+                                </div>
+
+                                <div id="todayPanel" class="date-panel">
+                                    <div class="today-box">
+                                        <div class="today-icon" aria-hidden="true">📅</div>
+                                        <div>
+                                            <div class="today-title">تاریخ امروز</div>
+                                            <div id="todayDateText" class="today-date">—</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="manualDatePanel" class="date-panel hidden">
+                                    <input id="manualDateInput" class="input" type="text"
+                                           inputmode="numeric" autocomplete="off"
+                                           placeholder="مثال: ۱۴۰۵/۰۱/۱۵"
+                                           maxlength="10" aria-describedby="dateError">
+                                    <div id="dateError" class="field-error" role="alert"></div>
+                                    <div class="field-hint">اعداد فارسی و انگلیسی پشتیبانی می‌شوند.</div>
+                                </div>
+                            </div>
+
+                            <!-- نوبت کاری -->
+                            <div class="form-section">
+                                <div class="section-label">
+                                    <span>نوبت کاری <span class="required-mark">*</span></span>
+                                    <span class="label-hint">یک یا هر دو نوبت</span>
+                                </div>
+
+                                <div class="shift-grid">
+                                    <div>
+                                        <input id="morningShift" class="shift-checkbox" type="checkbox">
+                                        <label class="shift-card" for="morningShift">
+                                            <span class="shift-icon" aria-hidden="true">☀️</span>
+                                            <span>
+                                                <span class="shift-name">نوبت صبح</span>
+                                                <span class="shift-time">شیفت اول کاری</span>
+                                            </span>
+                                            <span class="shift-checkmark" aria-hidden="true">✓</span>
+                                        </label>
+                                    </div>
+
+                                    <div>
+                                        <input id="afternoonShift" class="shift-checkbox" type="checkbox">
+                                        <label class="shift-card" for="afternoonShift">
+                                            <span class="shift-icon" aria-hidden="true">🌤️</span>
+                                            <span>
+                                                <span class="shift-name">نوبت بعدازظهر</span>
+                                                <span class="shift-time">شیفت دوم کاری</span>
+                                            </span>
+                                            <span class="shift-checkmark" aria-hidden="true">✓</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div id="shiftError" class="field-error" role="alert"></div>
+                            </div>
+
+                            <!-- متن گزارش -->
+                            <div class="form-section">
+                                <div class="section-label">
+                                    <span>شرح کار / گزارش <span class="required-mark">*</span></span>
+                                    <span class="label-hint">خلاصه و دقیق بنویسید</span>
+                                </div>
+
+                                <textarea id="reportText" class="textarea" maxlength="4000"
+                                          placeholder="کارهای انجام‌شده، نتایج و نکات مهم را اینجا بنویسید..."
+                                          aria-describedby="reportError characterCounter"></textarea>
+
+                                <div class="field-footer">
+                                    <div id="reportError" class="field-error" role="alert"></div>
+                                    <div id="characterCounter" class="character-counter">۰ از ۴۰۰۰ نویسه</div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- پیش‌نمایش و ارسال -->
+                <aside class="preview-column">
+                    <section class="card">
+                        <div class="card-header">
+                            <div class="card-heading">
+                                <div class="card-heading-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                        <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"
+                                              stroke="currentColor" stroke-width="1.8"/>
+                                        <circle cx="12" cy="12" r="2.6"
+                                                stroke="currentColor" stroke-width="1.8"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h2 class="card-title">پیش‌نمایش پیام</h2>
+                                    <p class="card-subtitle">متنی که به کانال ارسال می‌شود</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div id="messagePreview" class="preview-box" aria-live="polite"></div>
+
+                            <div class="cors-note">
+                                <span class="note-icon" aria-hidden="true">⚠️</span>
+                                <span>
+                                    ارسال مستقیم از مرورگر به سیاست CORS و دسترسی API ایتا وابسته است.
+                                    اگر مرورگر درخواست را مسدود کند، برای ارسال واقعی باید از یک
+                                    بک‌اند یا پراکسی امن استفاده شود.
+                                </span>
+                            </div>
+
+                            <button id="sendButton" class="btn btn-primary send-button" type="button">
+                                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="m21 3-8.4 18-2.1-7.5L3 11.4 21 3Z"
+                                          stroke="currentColor" stroke-width="1.8"
+                                          stroke-linejoin="round"/>
+                                    <path d="m10.5 13.5 4.2-4.2"
+                                          stroke="currentColor" stroke-width="1.8"
+                                          stroke-linecap="round"/>
+                                </svg>
+                                <span>ارسال گزارش به ایتا</span>
+                            </button>
+
+                            <div id="sendStatus" class="status-message" role="status" aria-live="polite"></div>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+
+            <!-- سوابق -->
+            <section class="card history-card">
+                <div class="card-header">
+                    <div class="card-heading">
+                        <div class="card-heading-icon">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M3.5 12a8.5 8.5 0 1 0 2.1-5.6L3.5 8.5"
+                                      stroke="currentColor" stroke-width="1.8"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3.5 4.5v4h4M12 7.5V12l3 1.8"
+                                      stroke="currentColor" stroke-width="1.8"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="card-title">سوابق گزارش‌ها</h2>
+                            <p class="card-subtitle">۲۰ گزارش آخر ارسال‌شده</p>
+                        </div>
+                    </div>
+
+                    <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;">
+                        <span id="historyCounter" class="history-counter">۰ گزارش</span>
+                        <button id="clearHistoryButton" class="btn btn-danger btn-small hidden"
+                                type="button">
+                            پاک کردن همه
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div id="historyList" class="history-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- پنجره تنظیمات -->
+    <div id="settingsBackdrop" class="modal-backdrop hidden"
+         role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+        <section class="modal">
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <div>
+                        <h2 id="settingsTitle">تنظیمات اتصال به ایتا</h2>
+                        <p>
+                            توکن API و شناسه کانالی را وارد کنید که ربات اجازه ارسال پیام به آن را دارد.
+                        </p>
+                    </div>
+
+                    <button id="closeSettingsButton" class="modal-close hidden" type="button"
+                            aria-label="بستن تنظیمات">✕</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form id="settingsForm" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="tokenInput">
+                            API Token ایتا <span class="required-mark">*</span>
+                        </label>
+
+                        <div class="input-wrapper">
+                            <input id="tokenInput" class="input input-with-action" type="password"
+                                   autocomplete="off" spellcheck="false"
+                                   placeholder="توکن دریافتی از ایتا">
+                            <button id="toggleTokenButton" class="token-toggle" type="button"
+                                    aria-label="نمایش توکن" title="نمایش یا مخفی کردن توکن">
+                                <svg id="eyeOpenIcon" viewBox="0 0 24 24" fill="none"
+                                     aria-hidden="true">
+                                    <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"
+                                          stroke="currentColor" stroke-width="1.8"/>
+                                    <circle cx="12" cy="12" r="2.6"
+                                            stroke="currentColor" stroke-width="1.8"/>
+                                </svg>
+                                <svg id="eyeClosedIcon" class="hidden" viewBox="0 0 24 24"
+                                     fill="none" aria-hidden="true">
+                                    <path d="M4 4 20 20M9.8 6.3A9 9 0 0 1 12 6c6 0 9.5 6 9.5 6a13 13 0 0 1-2.4 3.1M6.2 7.6A13.8 13.8 0 0 0 2.5 12s3.5 6 9.5 6c1.3 0 2.5-.3 3.5-.7"
+                                          stroke="currentColor" stroke-width="1.8"
+                                          stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div id="tokenError" class="field-error" role="alert"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="chatIdInput">
+                            شناسه یا Chat ID کانال <span class="required-mark">*</span>
+                        </label>
+                        <input id="chatIdInput" class="input" type="text" autocomplete="off"
+                               spellcheck="false" dir="ltr"
+                               placeholder="مثال: @channel یا شناسه عددی">
+                        <div id="chatIdError" class="field-error" role="alert"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="channelTitleInput">
+                            نام یا عنوان کانال
+                            <span class="field-hint">(اختیاری)</span>
+                        </label>
+                        <input id="channelTitleInput" class="input" type="text"
+                               autocomplete="off" maxlength="80"
+                               placeholder="مثال: گزارش روزانه تیم">
+                    </div>
+
+                    <div class="security-note">
+                        <span class="note-icon" aria-hidden="true">🔐</span>
+                        <span>
+                            توکن در <b>localStorage</b> همین مرورگر ذخیره می‌شود و رمزگذاری‌شده نیست.
+                            این روش فقط برای استفاده شخصی روی دستگاه مطمئن مناسب است و نباید در
+                            رایانه‌های عمومی یا مشترک استفاده شود.
+                        </span>
+                    </div>
+
+                    <div id="settingsStatus" class="status-message" role="alert"></div>
+
+                    <div class="modal-actions">
+                        <button id="deleteSettingsButton" class="btn btn-danger hidden"
+                                type="button">
+                            حذف تنظیمات
+                        </button>
+
+                        <div class="modal-actions-main">
+                            <button id="cancelSettingsButton" class="btn btn-ghost hidden"
+                                    type="button">
+                                انصراف
+                            </button>
+                            <button class="btn btn-primary" type="submit">
+                                ذخیره تنظیمات
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- پنجره تأیید سفارشی -->
+    <div id="confirmBackdrop" class="modal-backdrop hidden"
+         role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+        <section class="modal confirm-modal">
+            <div class="confirm-icon" aria-hidden="true">
+                <svg width="31" height="31" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 8v5M12 17h.01"
+                          stroke="currentColor" stroke-width="2"
+                          stroke-linecap="round"/>
+                    <path d="M10.25 3.9 2.5 17.3A2 2 0 0 0 4.23 20h15.54a2 2 0 0 0 1.73-2.7L13.75 3.9a2 2 0 0 0-3.5 0Z"
+                          stroke="currentColor" stroke-width="1.7"
+                          stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 id="confirmTitle">آیا مطمئن هستید؟</h3>
+            <p id="confirmText"></p>
+            <div class="confirm-actions">
+                <button id="confirmCancelButton" class="btn btn-ghost" type="button">انصراف</button>
+                <button id="confirmAcceptButton" class="btn btn-danger" type="button">تأیید</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+    <script>
+        "use strict";
+
+        /* =========================================================
+           تنظیمات قابل ویرایش API
+           
+           در صورت تغییر نشانی API ایتا، فقط این تابع را ویرایش کنید.
+           ساختار پیش‌فرض:
+           https://eitaayar.ir/api/{TOKEN}/sendMessage
+        ========================================================= */
+        const EITAA_API = {
+            baseUrl: "https://eitaayar.ir/api",
+            method: "sendMessage",
+
+            createUrl(token) {
+                const cleanBase = this.baseUrl.replace(/\/+$/, "");
+                return `${cleanBase}/${encodeURIComponent(token)}/${this.method}`;
+            }
+        };
+
+        const STORAGE_KEYS = {
+            settings: "eitaa_reporter_settings_v1",
+            history: "eitaa_reporter_history_v1"
+        };
+
+        const HISTORY_DISPLAY_LIMIT = 20;
+        const HISTORY_STORAGE_LIMIT = 100;
+        const REPORT_MAX_LENGTH = 4000;
+
+        /* =========================================================
+           دسترسی به عناصر
+        ========================================================= */
+        const elements = {
+            reportForm: document.getElementById("reportForm"),
+            dateToday: document.getElementById("dateToday"),
+            dateManual: document.getElementById("dateManual"),
+            todayPanel: document.getElementById("todayPanel"),
+            manualDatePanel: document.getElementById("manualDatePanel"),
+            todayDateText: document.getElementById("todayDateText"),
+            manualDateInput: document.getElementById("manualDateInput"),
+            dateError: document.getElementById("dateError"),
+
+            morningShift: document.getElementById("morningShift"),
+            afternoonShift: document.getElementById("afternoonShift"),
+            shiftError: document.getElementById("shiftError"),
+
+            reportText: document.getElementById("reportText"),
+            reportError: document.getElementById("reportError"),
+            characterCounter: document.getElementById("characterCounter"),
+
+            messagePreview: document.getElementById("messagePreview"),
+            sendButton: document.getElementById("sendButton"),
+            sendStatus: document.getElementById("sendStatus"),
+
+            channelPill: document.getElementById("channelPill"),
+            channelDisplay: document.getElementById("channelDisplay"),
+            openSettingsButton: document.getElementById("openSettingsButton"),
+
+            historyList: document.getElementById("historyList"),
+            historyCounter: document.getElementById("historyCounter"),
+            clearHistoryButton: document.getElementById("clearHistoryButton"),
+
+            settingsBackdrop: document.getElementById("settingsBackdrop"),
+            settingsForm: document.getElementById("settingsForm"),
+            settingsTitle: document.getElementById("settingsTitle"),
+            closeSettingsButton: document.getElementById("closeSettingsButton"),
+            cancelSettingsButton: document.getElementById("cancelSettingsButton"),
+            deleteSettingsButton: document.getElementById("deleteSettingsButton"),
+            tokenInput: document.getElementById("tokenInput"),
+            toggleTokenButton: document.getElementById("toggleTokenButton"),
+            eyeOpenIcon: document.getElementById("eyeOpenIcon"),
+            eyeClosedIcon: document.getElementById("eyeClosedIcon"),
+            tokenError: document.getElementById("tokenError"),
+            chatIdInput: document.getElementById("chatIdInput"),
+            chatIdError: document.getElementById("chatIdError"),
+            channelTitleInput: document.getElementById("channelTitleInput"),
+            settingsStatus: document.getElementById("settingsStatus"),
+
+            confirmBackdrop: document.getElementById("confirmBackdrop"),
+            confirmTitle: document.getElementById("confirmTitle"),
+            confirmText: document.getElementById("confirmText"),
+            confirmCancelButton: document.getElementById("confirmCancelButton"),
+            confirmAcceptButton: document.getElementById("confirmAcceptButton"),
+
+            toastContainer: document.getElementById("toastContainer")
+        };
+
+        let currentSettings = loadSettings();
+        let historyRecords = loadHistory();
+        let confirmResolver = null;
+        let isSending = false;
+
+        /* =========================================================
+           ابزارهای عمومی
+        ========================================================= */
+        function toEnglishDigits(value) {
+            return String(value ?? "")
+                .replace(/[۰-۹]/g, digit => "۰۱۲۳۴۵۶۷۸۹".indexOf(digit))
+                .replace(/[٠-٩]/g, digit => "٠١٢٣٤٥٦٧٨٩".indexOf(digit));
+        }
+
+        function toPersianDigits(value) {
+            return String(value ?? "").replace(/\d/g, digit => "۰۱۲۳۴۵۶۷۸۹"[digit]);
+        }
+
+        function normalizeWhitespace(value) {
+            return String(value ?? "")
+                .replace(/\r\n/g, "\n")
+                .replace(/\r/g, "\n")
+                .trim();
+        }
+
+        function generateId() {
+            if (window.crypto && typeof window.crypto.randomUUID === "function") {
+                return window.crypto.randomUUID();
+            }
+
+            return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        }
+
+        function safeJsonParse(value, fallback) {
+            try {
+                return JSON.parse(value);
+            } catch {
+                return fallback;
+            }
+        }
+
+        function setFieldError(input, errorElement, message = "") {
+            if (input) {
+                input.classList.toggle("invalid", Boolean(message));
+                input.setAttribute("aria-invalid", message ? "true" : "false");
+            }
+
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.classList.toggle("show", Boolean(message));
+            }
+        }
+
+        function showStatus(element, type, message) {
+            element.className = `status-message show ${type}`;
+            element.innerHTML = "";
+
+            const icon = document.createElement("span");
+            icon.setAttribute("aria-hidden", "true");
+            icon.textContent = type === "success" ? "✓" : type === "error" ? "⚠️" : "ℹ️";
+
+            const text = document.createElement("span");
+            text.textContent = message;
+
+            element.append(icon, text);
+        }
+
+        function hideStatus(element) {
+            element.className = "status-message";
+            element.textContent = "";
+        }
+
+        function showToast(message, type = "") {
+            const toast = document.createElement("div");
+            toast.className = `toast ${type}`.trim();
+
+            const icon = document.createElement("span");
+            icon.setAttribute("aria-hidden", "true");
+            icon.textContent = type === "success" ? "✓" : type === "error" ? "⚠️" : "ℹ️";
+
+            const text = document.createElement("span");
+            text.textContent = message;
+
+            toast.append(icon, text);
+            elements.toastContainer.appendChild(toast);
+
+            window.setTimeout(() => {
+                toast.style.opacity = "0";
+                toast.style.transform = "translateY(8px)";
+                window.setTimeout(() => toast.remove(), 220);
+            }, 3600);
+        }
+
+        function escapeForDisplay(value) {
+            return String(value ?? "");
+        }
+
+        /* =========================================================
+           تبدیل دقیق تاریخ میلادی به جلالی
+           الگوریتم مستقل و بدون وابستگی خارجی
+        ========================================================= */
+        function div(a, b) {
+            return Math.trunc(a / b);
+        }
+
+        function mod(a, b) {
+            return a - Math.trunc(a / b) * b;
+        }
+
+        function jalCal(jy, withoutLeap = false) {
+            const breaks = [
+                -61, 9, 38, 199, 426, 686, 756, 818,
+                1111, 1181, 1210, 1635, 2060, 2097,
+                2192, 2262, 2324, 2394, 2456, 3178
+            ];
+
+            const bl = breaks.length;
+            const gy = jy + 621;
+            let leapJ = -14;
+            let jp = breaks[0];
+            let jump = 0;
+
+            if (jy < jp || jy >= breaks[bl - 1]) {
+                throw new Error("سال جلالی خارج از محدوده پشتیبانی است.");
+            }
+
+            for (let i = 1; i < bl; i++) {
+                const jm = breaks[i];
+                jump = jm - jp;
+
+                if (jy < jm) {
+                    break;
+                }
+
+                leapJ += div(jump, 33) * 8 + div(mod(jump, 33), 4);
+                jp = jm;
+            }
+
+            let n = jy - jp;
+            leapJ += div(n, 33) * 8 + div(mod(n, 33) + 3, 4);
+
+            if (mod(jump, 33) === 4 && jump - n === 4) {
+                leapJ += 1;
+            }
+
+            const leapG = div(gy, 4) - div((div(gy, 100) + 1) * 3, 4) - 150;
+            const march = 20 + leapJ - leapG;
+
+            if (withoutLeap) {
+                return { gy, march };
+            }
+
+            if (jump - n < 6) {
+                n = n - jump + div(jump + 4, 33) * 33;
+            }
+
+            let leap = mod(mod(n + 1, 33) - 1, 4);
+
+            if (leap === -1) {
+                leap = 4;
+            }
+
+            return { leap, gy, march };
+        }
+
+        function gregorianToJdn(gy, gm, gd) {
+            let d = div((gy + div(gm - 8, 6) + 100100) * 1461, 4)
+                + div(153 * mod(gm + 9, 12) + 2, 5)
+                + gd - 34840408;
+
+            d = d - div(div(gy + 100100 + div(gm - 8, 6), 100) * 3, 4) + 752;
+            return d;
+        }
+
+        function jdnToGregorian(jdn) {
+            let j = 4 * jdn + 139361631;
+            j = j + div(div(4 * jdn + 183187720, 146097) * 3, 4) * 4 - 3908;
+
+            const i = div(mod(j, 1461), 4) * 5 + 308;
+            const gd = div(mod(i, 153), 5) + 1;
+            const gm = mod(div(i, 153), 12) + 1;
+            const gy = div(j, 1461) - 100100 + div(8 - gm, 6);
+
+            return { gy, gm, gd };
+        }
+
+        function jalaliToJdn(jy, jm, jd) {
+            const r = jalCal(jy, true);
+
+            return gregorianToJdn(r.gy, 3, r.march)
+                + (jm - 1) * 31
+                - div(jm, 7) * (jm - 7)
+                + jd - 1;
+        }
+
+        function jdnToJalali(jdn) {
+            const gregorian = jdnToGregorian(jdn);
+            let jy = gregorian.gy - 621;
+            const r = jalCal(jy, false);
+            const jdn1f = gregorianToJdn(gregorian.gy, 3, r.march);
+            let k = jdn - jdn1f;
+            let jm;
+            let jd;
+
+            if (k >= 0) {
+                if (k <= 185) {
+                    jm = 1 + div(k, 31);
+                    jd = mod(k, 31) + 1;
+                    return { jy, jm, jd };
+                }
+
+                k -= 186;
+            } else {
+                jy -= 1;
+                k += 179;
+
+                if (r.leap === 1) {
+                    k += 1;
+                }
+            }
+
+            jm = 7 + div(k, 30);
+            jd = mod(k, 30) + 1;
+
+            return { jy, jm, jd };
+        }
+
+        function toJalali(gy, gm, gd) {
+            return jdnToJalali(gregorianToJdn(gy, gm, gd));
+        }
+
+        function isLeapJalaliYear(jy) {
+            try {
+                return jalCal(jy).leap === 0;
+            } catch {
+                return false;
+            }
+        }
+
+        function jalaliMonthLength(jy, jm) {
+            if (jm >= 1 && jm <= 6) return 31;
+            if (jm >= 7 && jm <= 11) return 30;
+            if (jm === 12) return isLeapJalaliYear(jy) ? 30 : 29;
+            return 0;
+        }
+
+        function isValidJalaliDate(jy, jm, jd) {
+            if (!Number.isInteger(jy) || !Number.isInteger(jm) || !Number.isInteger(jd)) {
+                return false;
+            }
+
+            if (jy < -61 || jy > 3177 || jm < 1 || jm > 12 || jd < 1) {
+                return false;
+            }
+
+            return jd <= jalaliMonthLength(jy, jm);
+        }
+
+        function pad2(value) {
+            return String(value).padStart(2, "0");
+        }
+
+        function formatJalaliDate(jy, jm, jd, usePersianDigits = true) {
+            const formatted = `${jy}/${pad2(jm)}/${pad2(jd)}`;
+            return usePersianDigits ? toPersianDigits(formatted) : formatted;
+        }
+
+        function getTodayJalali() {
+            const now = new Date();
+            const result = toJalali(
+                now.getFullYear(),
+                now.getMonth() + 1,
+                now.getDate()
+            );
+
+            return {
+                ...result,
+                formatted: formatJalaliDate(result.jy, result.jm, result.jd, true),
+                normalized: formatJalaliDate(result.jy, result.jm, result.jd, false)
+            };
+        }
+
+        function parseJalaliDate(inputValue) {
+            const normalized = toEnglishDigits(inputValue)
+                .trim()
+                .replace(/[.\-]/g, "/")
+                .replace(/\s+/g, "");
+
+            const match = normalized.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+
+            if (!match) {
+                return {
+                    valid: false,
+                    error: "تاریخ را با قالب ۱۴۰۵/۰۱/۱۵ وارد کنید."
+                };
+            }
+
+            const jy = Number(match[1]);
+            const jm = Number(match[2]);
+            const jd = Number(match[3]);
+
+            if (!isValidJalaliDate(jy, jm, jd)) {
+                return {
+                    valid: false,
+                    error: "تاریخ شمسی واردشده معتبر نیست."
+                };
+            }
+
+            return {
+                valid: true,
+                jy,
+                jm,
+                jd,
+                formatted: formatJalaliDate(jy, jm, jd, true),
+                normalized: formatJalaliDate(jy, jm, jd, false)
+            };
+        }
+
+        /* =========================================================
+           تنظیمات و localStorage
+        ========================================================= */
+        function loadSettings() {
+            const stored = safeJsonParse(
+                localStorage.getItem(STORAGE_KEYS.settings),
+                null
+            );
+
+            if (
+                stored &&
+                typeof stored.token === "string" &&
+                stored.token.trim() &&
+                typeof stored.chatId === "string" &&
+                stored.chatId.trim()
+            ) {
+                return {
+                    token: stored.token.trim(),
+                    chatId: stored.chatId.trim(),
+                    channelTitle: String(stored.channelTitle || "").trim()
+                };
+            }
+
+            return null;
+        }
+
+        function saveSettings(settings) {
+            localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(settings));
+            currentSettings = settings;
+            updateChannelDisplay();
+        }
+
+        function removeSettings() {
+            localStorage.removeItem(STORAGE_KEYS.settings);
+            currentSettings = null;
+            updateChannelDisplay();
+        }
+
+        function loadHistory() {
+            const stored = safeJsonParse(
+                localStorage.getItem(STORAGE_KEYS.history),
+                []
+            );
+
+            return Array.isArray(stored)
+                ? stored.filter(item =>
+                    item &&
+                    typeof item === "object" &&
+                    typeof item.text === "string"
+                ).slice(0, HISTORY_STORAGE_LIMIT)
+                : [];
+        }
+
+        function saveHistory() {
+            historyRecords = historyRecords.slice(0, HISTORY_STORAGE_LIMIT);
+            localStorage.setItem(STORAGE_KEYS.history, JSON.stringify(historyRecords));
+            renderHistory();
+        }
+
+        function updateChannelDisplay() {
+            if (!currentSettings) {
+                elements.channelPill.classList.add("hidden");
+                return;
+            }
+
+            const displayName = currentSettings.channelTitle || currentSettings.chatId;
+            elements.channelDisplay.textContent = displayName;
+            elements.channelPill.classList.remove("hidden");
+        }
+
+        /* =========================================================
+           تنظیمات
+        ========================================================= */
+        function openSettings(isFirstVisit = false) {
+            hideStatus(elements.settingsStatus);
+
+            elements.tokenInput.value = currentSettings?.token || "";
+            elements.chatIdInput.value = currentSettings?.chatId || "";
+            elements.channelTitleInput.value = currentSettings?.channelTitle || "";
+            setFieldError(elements.tokenInput, elements.tokenError);
+            setFieldError(elements.chatIdInput, elements.chatIdError);
+
+            elements.tokenInput.type = "password";
+            elements.eyeOpenIcon.classList.remove("hidden");
+            elements.eyeClosedIcon.classList.add("hidden");
+            elements.toggleTokenButton.setAttribute("aria-label", "نمایش توکن");
+
+            const canClose = Boolean(currentSettings) && !isFirstVisit;
+            elements.closeSettingsButton.classList.toggle("hidden", !canClose);
+            elements.cancelSettingsButton.classList.toggle("hidden", !canClose);
+            elements.deleteSettingsButton.classList.toggle("hidden", !currentSettings);
+            elements.settingsTitle.textContent = currentSettings
+                ? "ویرایش تنظیمات اتصال"
+                : "تنظیمات اولیه اتصال به ایتا";
+
+            elements.settingsBackdrop.classList.remove("hidden");
+            document.body.classList.add("modal-open");
+
+            window.setTimeout(() => elements.tokenInput.focus(), 80);
+        }
+
+        function closeSettings() {
+            if (!currentSettings) return;
+
+            elements.settingsBackdrop.classList.add("hidden");
+            document.body.classList.remove("modal-open");
+            elements.openSettingsButton.focus();
+        }
+
+        function validateSettingsForm() {
+            const token = elements.tokenInput.value.trim();
+            const chatId = elements.chatIdInput.value.trim();
+            let valid = true;
+
+            setFieldError(elements.tokenInput, elements.tokenError);
+            setFieldError(elements.chatIdInput, elements.chatIdError);
+
+            if (!token) {
+                setFieldError(
+                    elements.tokenInput,
+                    elements.tokenError,
+                    "وارد کردن API Token الزامی است."
+                );
+                valid = false;
+            } else if (/\s/.test(token)) {
+                setFieldError(
+                    elements.tokenInput,
+                    elements.tokenError,
+                    "توکن نباید شامل فاصله باشد."
+                );
+                valid = false;
+            }
+
+            if (!chatId) {
+                setFieldError(
+                    elements.chatIdInput,
+                    elements.chatIdError,
+                    "وارد کردن شناسه کانال الزامی است."
+                );
+                valid = false;
+            } else if (/\s/.test(chatId)) {
+                setFieldError(
+                    elements.chatIdInput,
+                    elements.chatIdError,
+                    "شناسه کانال نباید شامل فاصله باشد."
+                );
+                valid = false;
+            }
+
+            return {
+                valid,
+                settings: {
+                    token,
+                    chatId,
+                    channelTitle: elements.channelTitleInput.value.trim()
+                }
+            };
+        }
+
+        elements.settingsForm.addEventListener("submit", event => {
+            event.preventDefault();
+            hideStatus(elements.settingsStatus);
+
+            const result = validateSettingsForm();
+
+            if (!result.valid) {
+                showStatus(
+                    elements.settingsStatus,
+                    "error",
+                    "لطفاً خطاهای مشخص‌شده را برطرف کنید."
+                );
+                return;
+            }
+
+            try {
+                saveSettings(result.settings);
+                showToast("تنظیمات با موفقیت ذخیره شد.", "success");
+                elements.settingsBackdrop.classList.add("hidden");
+                document.body.classList.remove("modal-open");
+            } catch {
+                showStatus(
+                    elements.settingsStatus,
+                    "error",
+                    "ذخیره تنظیمات در مرورگر انجام نشد. فضای ذخیره‌سازی مرورگر را بررسی کنید."
+                );
+            }
+        });
+
+        elements.openSettingsButton.addEventListener("click", () => openSettings(false));
+        elements.closeSettingsButton.addEventListener("click", closeSettings);
+        elements.cancelSettingsButton.addEventListener("click", closeSettings);
+
+        elements.toggleTokenButton.addEventListener("click", () => {
+            const isPassword = elements.tokenInput.type === "password";
+            elements.tokenInput.type = isPassword ? "text" : "password";
+            elements.eyeOpenIcon.classList.toggle("hidden", isPassword);
+            elements.eyeClosedIcon.classList.toggle("hidden", !isPassword);
+            elements.toggleTokenButton.setAttribute(
+                "aria-label",
+                isPassword ? "مخفی کردن توکن" : "نمایش توکن"
+            );
+        });
+
+        elements.tokenInput.addEventListener("input", () => {
+            setFieldError(elements.tokenInput, elements.tokenError);
+            hideStatus(elements.settingsStatus);
+        });
+
+        elements.chatIdInput.addEventListener("input", () => {
+            setFieldError(elements.chatIdInput, elements.chatIdError);
+            hideStatus(elements.settingsStatus);
+        });
+
+        elements.deleteSettingsButton.addEventListener("click", async () => {
+            const accepted = await askConfirmation({
+                title: "حذف تنظیمات اتصال",
+                text: "توکن و شناسه کانال از این مرورگر حذف می‌شوند. سوابق گزارش‌ها باقی خواهند ماند.",
+                acceptText: "حذف تنظیمات"
+            });
+
+            if (!accepted) return;
+
+            removeSettings();
+            elements.tokenInput.value = "";
+            elements.chatIdInput.value = "";
+            elements.channelTitleInput.value = "";
+            elements.closeSettingsButton.classList.add("hidden");
+            elements.cancelSettingsButton.classList.add("hidden");
+            elements.deleteSettingsButton.classList.add("hidden");
+            elements.settingsTitle.textContent = "تنظیمات اولیه اتصال به ایتا";
+
+            showStatus(
+                elements.settingsStatus,
+                "success",
+                "تنظیمات حذف شد. برای ادامه، اطلاعات اتصال جدید را وارد کنید."
+            );
+        });
+
+        /* =========================================================
+           تاریخ، نوبت، متن و پیش‌نمایش
+        ========================================================= */
+        function updateDateMode() {
+            const isManual = elements.dateManual.checked;
+
+            elements.todayPanel.classList.toggle("hidden", isManual);
+            elements.manualDatePanel.classList.toggle("hidden", !isManual);
+
+            if (!isManual) {
+                setFieldError(elements.manualDateInput, elements.dateError);
+            } else {
+                window.setTimeout(() => elements.manualDateInput.focus(), 50);
+            }
+
+            updatePreview();
+        }
+
+        function formatDateInputWhileTyping(value) {
+            const digits = toEnglishDigits(value).replace(/\D/g, "").slice(0, 8);
+            const parts = [];
+
+            if (digits.length > 0) parts.push(digits.slice(0, 4));
+            if (digits.length > 4) parts.push(digits.slice(4, 6));
+            if (digits.length > 6) parts.push(digits.slice(6, 8));
+
+            return toPersianDigits(parts.join("/"));
+        }
+
+        function getSelectedDate(showValidation = false) {
+            if (elements.dateToday.checked) {
+                return {
+                    valid: true,
+                    ...getTodayJalali()
+                };
+            }
+
+            const result = parseJalaliDate(elements.manualDateInput.value);
+
+            if (showValidation) {
+                setFieldError(
+                    elements.manualDateInput,
+                    elements.dateError,
+                    result.valid ? "" : result.error
+                );
+            }
+
+            return result;
+        }
+
+        function getSelectedShifts() {
+            const shifts = [];
+
+            if (elements.morningShift.checked) shifts.push("صبح");
+            if (elements.afternoonShift.checked) shifts.push("بعدازظهر");
+
+            return shifts;
+        }
+
+        function buildMessage(date, shifts, reportText) {
+            const cleanText = normalizeWhitespace(reportText);
+
+            return `📌 گزارش کار
+
+📅 تاریخ: ${date}
+🕐 نوبت: ${shifts.join("، ")}
+
+📝 شرح کار:
+${cleanText}`;
+        }
+
+        function updateCharacterCounter() {
+            const count = elements.reportText.value.length;
+            elements.characterCounter.textContent =
+                `${toPersianDigits(count)} از ${toPersianDigits(REPORT_MAX_LENGTH)} نویسه`;
+            elements.characterCounter.classList.toggle(
+                "near-limit",
+                count >= REPORT_MAX_LENGTH * 0.9
+            );
+        }
+
+        function updatePreview() {
+            const dateResult = getSelectedDate(false);
+            const shifts = getSelectedShifts();
+            const reportText = normalizeWhitespace(elements.reportText.value);
+
+            const dateText = dateResult.valid ? dateResult.formatted : "تاریخ نامعتبر";
+            const shiftText = shifts.length ? shifts : ["انتخاب نشده"];
+            const description = reportText || "شرح گزارش شما در این بخش نمایش داده می‌شود.";
+
+            elements.messagePreview.textContent = buildMessage(
+                dateText,
+                shiftText,
+                description
+            );
+
+            elements.messagePreview.classList.toggle(
+                "preview-placeholder",
+                !reportText || !shifts.length || !dateResult.valid
+            );
+        }
+
+        function validateReport() {
+            const dateResult = getSelectedDate(true);
+            const shifts = getSelectedShifts();
+            const reportText = normalizeWhitespace(elements.reportText.value);
+            let valid = true;
+            let firstInvalidElement = null;
+
+            setFieldError(elements.reportText, elements.reportError);
+            elements.shiftError.textContent = "";
+            elements.shiftError.classList.remove("show");
+
+            if (!dateResult.valid) {
+                valid = false;
+                firstInvalidElement ||= elements.manualDateInput;
+            }
+
+            if (!shifts.length) {
+                elements.shiftError.textContent = "حداقل یک نوبت کاری را انتخاب کنید.";
+                elements.shiftError.classList.add("show");
+                valid = false;
+                firstInvalidElement ||= elements.morningShift;
+            }
+
+            if (!reportText) {
+                setFieldError(
+                    elements.reportText,
+                    elements.reportError,
+                    "نوشتن شرح کار یا گزارش الزامی است."
+                );
+                valid = false;
+                firstInvalidElement ||= elements.reportText;
+            }
+
+            if (reportText.length > REPORT_MAX_LENGTH) {
+                setFieldError(
+                    elements.reportText,
+                    elements.reportError,
+                    `متن گزارش نباید بیشتر از ${toPersianDigits(REPORT_MAX_LENGTH)} نویسه باشد.`
+                );
+                valid = false;
+                firstInvalidElement ||= elements.reportText;
+            }
+
+            return {
+                valid,
+                firstInvalidElement,
+                date: dateResult.valid ? dateResult.formatted : "",
+                shifts,
+                reportText,
+                message: dateResult.valid && shifts.length && reportText
+                    ? buildMessage(dateResult.formatted, shifts, reportText)
+                    : ""
+            };
+        }
+
+        elements.dateToday.addEventListener("change", updateDateMode);
+        elements.dateManual.addEventListener("change", updateDateMode);
+
+        elements.manualDateInput.addEventListener("input", event => {
+            const cursorAtEnd =
+                event.target.selectionStart === event.target.value.length;
+
+            event.target.value = formatDateInputWhileTyping(event.target.value);
+
+            if (cursorAtEnd) {
+                event.target.setSelectionRange(
+                    event.target.value.length,
+                    event.target.value.length
+                );
+            }
+
+            const result = parseJalaliDate(event.target.value);
+
+            if (event.target.value.length === 10) {
+                setFieldError(
+                    elements.manualDateInput,
+                    elements.dateError,
+                    result.valid ? "" : result.error
+                );
+            } else {
+                setFieldError(elements.manualDateInput, elements.dateError);
+            }
+
+            hideStatus(elements.sendStatus);
+            updatePreview();
+        });
+
+        elements.manualDateInput.addEventListener("blur", () => {
+            if (elements.dateManual.checked && elements.manualDateInput.value.trim()) {
+                getSelectedDate(true);
+            }
+        });
+
+        [elements.morningShift, elements.afternoonShift].forEach(checkbox => {
+            checkbox.addEventListener("change", () => {
+                if (getSelectedShifts().length) {
+                    elements.shiftError.textContent = "";
+                    elements.shiftError.classList.remove("show");
+                }
+
+                hideStatus(elements.sendStatus);
+                updatePreview();
+            });
+        });
+
+        elements.reportText.addEventListener("input", () => {
+            if (normalizeWhitespace(elements.reportText.value)) {
+                setFieldError(elements.reportText, elements.reportError);
+            }
+
+            hideStatus(elements.sendStatus);
+            updateCharacterCounter();
+            updatePreview();
+        });
+
+        /* =========================================================
+           ارسال به API ایتا
+        ========================================================= */
+        function setSendingState(sending, button = elements.sendButton) {
+            isSending = sending;
+            button.disabled = sending;
+
+            if (button === elements.sendButton) {
+                if (sending) {
+                    button.innerHTML = `
+                        <span class="spinner" aria-hidden="true"></span>
+                        <span>در حال ارسال...</span>
+                    `;
+                } else {
+                    button.innerHTML = `
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="m21 3-8.4 18-2.1-7.5L3 11.4 21 3Z"
+                                  stroke="currentColor" stroke-width="1.8"
+                                  stroke-linejoin="round"/>
+                            <path d="m10.5 13.5 4.2-4.2"
+                                  stroke="currentColor" stroke-width="1.8"
+                                  stroke-linecap="round"/>
+                        </svg>
+                        <span>ارسال گزارش به ایتا</span>
+                    `;
+                }
+            }
+        }
+
+        async function readApiResponse(response) {
+            const rawText = await response.text();
+
+            if (!rawText) {
+                return {
+                    ok: response.ok,
+                    description: response.ok ? "" : `خطای HTTP ${response.status}`
+                };
+            }
+
+            try {
+                return JSON.parse(rawText);
+            } catch {
+                return {
+                    ok: response.ok,
+                    description: rawText.slice(0, 500)
+                };
+            }
+        }
+
+        function translateApiError(error, responseData = null) {
+            const description = String(
+                responseData?.description ||
+                responseData?.message ||
+                error?.message ||
+                ""
+            );
+
+            const normalized = description.toLowerCase();
+
+            if (
+                error instanceof TypeError ||
+                normalized.includes("failed to fetch") ||
+                normalized.includes("networkerror") ||
+                normalized.includes("load failed")
+            ) {
+                return "ارتباط مستقیم با API برقرار نشد. اینترنت، نشانی API یا محدودیت CORS مرورگر را بررسی کنید. در صورت مسدود بودن CORS، استفاده از بک‌اند یا پراکسی امن ضروری است.";
+            }
+
+            if (
+                normalized.includes("unauthorized") ||
+                normalized.includes("token") ||
+                normalized.includes("401")
+            ) {
+                return "توکن API نامعتبر است یا اجازه دسترسی ندارد. تنظیمات اتصال را بررسی کنید.";
+            }
+
+            if (
+                normalized.includes("chat") ||
+                normalized.includes("channel") ||
+                normalized.includes("not found")
+            ) {
+                return "شناسه کانال پیدا نشد یا ربات اجازه ارسال به آن را ندارد.";
+            }
+
+            if (
+                normalized.includes("too many") ||
+                normalized.includes("429")
+            ) {
+                return "تعداد درخواست‌ها بیش از حد مجاز است. کمی بعد دوباره تلاش کنید.";
+            }
+
+            if (description) {
+                return `ارسال انجام نشد: ${description}`;
+            }
+
+            return "ارسال گزارش با خطای نامشخص مواجه شد. تنظیمات اتصال و دسترسی ربات را بررسی کنید.";
+        }
+
+        /**
+         * تابع کامل ارسال پیام به ایتا
+         *
+         * URL:
+         *   EITAA_API.createUrl(token)
+         *
+         * مقادیر ارسالی:
+         *   chat_id = شناسه کانال
+         *   text    = متن نهایی گزارش
+         *
+         * از URLSearchParams استفاده شده تا درخواست به صورت
+         * application/x-www-form-urlencoded ارسال شود.
+         */
+        async function sendMessageToEitaa({ token, chatId, text }) {
+            const url = EITAA_API.createUrl(token);
+
+            const body = new URLSearchParams();
+            body.set("chat_id", chatId);
+            body.set("text", text);
+
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+                },
+                body: body.toString()
+            });
+
+            const data = await readApiResponse(response);
+
+            const apiRejected =
+                data &&
+                Object.prototype.hasOwnProperty.call(data, "ok") &&
+                data.ok === false;
+
+            if (!response.ok || apiRejected) {
+                const error = new Error(
+                    data?.description ||
+                    data?.message ||
+                    `HTTP ${response.status}`
+                );
+
+                error.responseData = data;
+                error.httpStatus = response.status;
+                throw error;
+            }
+
+            return data;
+        }
+
+        async function submitNewReport() {
+            if (isSending) return;
+
+            hideStatus(elements.sendStatus);
+
+            if (!currentSettings) {
+                showStatus(
+                    elements.sendStatus,
+                    "error",
+                    "ابتدا توکن API و شناسه کانال را در تنظیمات وارد کنید."
+                );
+                openSettings(true);
+                return;
+            }
+
+            const report = validateReport();
+
+            if (!report.valid) {
+                showStatus(
+                    elements.sendStatus,
+                    "error",
+                    "لطفاً اطلاعات ضروری گزارش را کامل و صحیح وارد کنید."
+                );
+
+                report.firstInvalidElement?.focus();
+                return;
+            }
+
+            setSendingState(true);
+
+            try {
+                await sendMessageToEitaa({
+                    token: currentSettings.token,
+                    chatId: currentSettings.chatId,
+                    text: report.message
+                });
+
+                const record = {
+                    id: generateId(),
+                    date: report.date,
+                    shifts: report.shifts,
+                    text: report.reportText,
+                    message: report.message,
+                    status: "sent",
+                    sentAt: new Date().toISOString()
+                };
+
+                historyRecords.unshift(record);
+                saveHistory();
+
+                showStatus(
+                    elements.sendStatus,
+                    "success",
+                    "گزارش با موفقیت ارسال شد."
+                );
+
+                resetReportForm();
+            } catch (error) {
+                console.error("Eitaa API error:", error);
+
+                showStatus(
+                    elements.sendStatus,
+                    "error",
+                    translateApiError(error, error.responseData)
+                );
+            } finally {
+                setSendingState(false);
+            }
+        }
+
+        elements.sendButton.addEventListener("click", submitNewReport);
+
+        /* با زدن Ctrl+Enter یا Cmd+Enter گزارش ارسال می‌شود. */
+        elements.reportText.addEventListener("keydown", event => {
+            if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+                event.preventDefault();
+                submitNewReport();
+            }
+        });
+
+        function resetReportForm() {
+            elements.dateToday.checked = true;
+            elements.dateManual.checked = false;
+            elements.manualDateInput.value = "";
+            elements.morningShift.checked = false;
+            elements.afternoonShift.checked = false;
+            elements.reportText.value = "";
+
+            setFieldError(elements.manualDateInput, elements.dateError);
+            setFieldError(elements.reportText, elements.reportError);
+            elements.shiftError.textContent = "";
+            elements.shiftError.classList.remove("show");
+
+            updateDateMode();
+            updateCharacterCounter();
+            updatePreview();
+        }
+
+        /* =========================================================
+           سوابق
+        ========================================================= */
+        function createHistoryButton(label, className, title) {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = `btn btn-small ${className}`;
+            button.textContent = label;
+            button.title = title;
+            return button;
+        }
+
+        function renderHistory() {
+            elements.historyList.innerHTML = "";
+
+            const visibleRecords = historyRecords.slice(0, HISTORY_DISPLAY_LIMIT);
+            elements.historyCounter.textContent =
+                `${toPersianDigits(historyRecords.length)} گزارش`;
+
+            elements.clearHistoryButton.classList.toggle(
+                "hidden",
+                historyRecords.length === 0
+            );
+
+            if (!visibleRecords.length) {
+                const emptyState = document.createElement("div");
+                emptyState.className = "empty-state";
+
+                const icon = document.createElement("div");
+                icon.className = "empty-icon";
+                icon.setAttribute("aria-hidden", "true");
+                icon.textContent = "🗂️";
+
+                const title = document.createElement("h3");
+                title.textContent = "هنوز گزارشی ثبت نشده است";
+
+                const text = document.createElement("p");
+                text.textContent = "گزارش‌های ارسال‌شده در این بخش نمایش داده می‌شوند.";
+
+                emptyState.append(icon, title, text);
+                elements.historyList.appendChild(emptyState);
+                return;
+            }
+
+            visibleRecords.forEach(record => {
+                const item = document.createElement("article");
+                item.className = "history-item";
+
+                const content = document.createElement("div");
+
+                const meta = document.createElement("div");
+                meta.className = "history-meta";
+
+                const date = document.createElement("span");
+                date.className = "history-date";
+                date.textContent = `📅 ${escapeForDisplay(record.date)}`;
+
+                const shift = document.createElement("span");
+                shift.className = "history-shift";
+                shift.textContent = `نوبت: ${
+                    Array.isArray(record.shifts)
+                        ? record.shifts.join("، ")
+                        : "نامشخص"
+                }`;
+
+                const badge = document.createElement("span");
+                badge.className = "sent-badge";
+                badge.textContent = "✓ ارسال‌شده";
+
+                const reportText = document.createElement("p");
+                reportText.className = "history-text";
+                reportText.textContent = record.text;
+
+                meta.append(date, shift, badge);
+                content.append(meta, reportText);
+
+                const actions = document.createElement("div");
+                actions.className = "history-actions";
+
+                const resendButton = createHistoryButton(
+                    "ارسال مجدد",
+                    "btn-ghost",
+                    "ارسال دوباره این گزارش"
+                );
+
+                const deleteButton = createHistoryButton(
+                    "حذف",
+                    "btn-danger",
+                    "حذف این سابقه"
+                );
+
+                resendButton.addEventListener("click", () => resendHistoryRecord(record, resendButton));
+                deleteButton.addEventListener("click", () => deleteHistoryRecord(record.id));
+
+                actions.append(resendButton, deleteButton);
+                item.append(content, actions);
+                elements.historyList.appendChild(item);
+            });
+        }
+
+        async function resendHistoryRecord(record, button) {
+            if (!currentSettings) {
+                showToast("ابتدا تنظیمات اتصال به ایتا را وارد کنید.", "error");
+                openSettings(true);
+                return;
+            }
+
+            const accepted = await askConfirmation({
+                title: "ارسال مجدد گزارش",
+                text: `گزارش تاریخ ${record.date} دوباره به کانال ارسال شود؟`,
+                acceptText: "ارسال مجدد",
+                danger: false
+            });
+
+            if (!accepted) return;
+
+            const originalText = button.textContent;
+            button.disabled = true;
+            button.textContent = "در حال ارسال...";
+
+            try {
+                const message = record.message || buildMessage(
+                    record.date,
+                    Array.isArray(record.shifts) ? record.shifts : ["نامشخص"],
+                    record.text
+                );
+
+                await sendMessageToEitaa({
+                    token: currentSettings.token,
+                    chatId: currentSettings.chatId,
+                    text: message
+                });
+
+                historyRecords.unshift({
+                    ...record,
+                    id: generateId(),
+                    message,
+                    sentAt: new Date().toISOString(),
+                    status: "sent"
+                });
+
+                saveHistory();
+                showToast("گزارش با موفقیت دوباره ارسال شد.", "success");
+            } catch (error) {
+                console.error("Eitaa resend error:", error);
+                showToast(
+                    translateApiError(error, error.responseData),
+                    "error"
+                );
+            } finally {
+                button.disabled = false;
+                button.textContent = originalText;
+            }
+        }
+
+        async function deleteHistoryRecord(id) {
+            const accepted = await askConfirmation({
+                title: "حذف سابقه",
+                text: "این سابقه از مرورگر حذف می‌شود و امکان بازگردانی آن وجود ندارد.",
+                acceptText: "حذف سابقه"
+            });
+
+            if (!accepted) return;
+
+            historyRecords = historyRecords.filter(record => record.id !== id);
+            saveHistory();
+            showToast("سابقه گزارش حذف شد.");
+        }
+
+        elements.clearHistoryButton.addEventListener("click", async () => {
+            const accepted = await askConfirmation({
+                title: "پاک کردن همه سوابق",
+                text: "تمام سوابق گزارش‌های ذخیره‌شده از این مرورگر حذف می‌شوند و امکان بازگردانی آن‌ها وجود ندارد.",
+                acceptText: "پاک کردن همه"
+            });
+
+            if (!accepted) return;
+
+            historyRecords = [];
+            localStorage.removeItem(STORAGE_KEYS.history);
+            renderHistory();
+            showToast("همه سوابق پاک شدند.");
+        });
+
+        /* =========================================================
+           پنجره تأیید سفارشی
+        ========================================================= */
+        function askConfirmation({
+            title,
+            text,
+            acceptText = "تأیید",
+            danger = true
+        }) {
+            elements.confirmTitle.textContent = title;
+            elements.confirmText.textContent = text;
+            elements.confirmAcceptButton.textContent = acceptText;
+            elements.confirmAcceptButton.className =
+                `btn ${danger ? "btn-danger" : "btn-primary"}`;
+
+            elements.confirmBackdrop.classList.remove("hidden");
+            document.body.classList.add("modal-open");
+
+            window.setTimeout(() => elements.confirmCancelButton.focus(), 50);
+
+            return new Promise(resolve => {
+                confirmResolver = resolve;
+            });
+        }
+
+        function closeConfirmation(result) {
+            elements.confirmBackdrop.classList.add("hidden");
+
+            if (elements.settingsBackdrop.classList.contains("hidden")) {
+                document.body.classList.remove("modal-open");
+            }
+
+            if (confirmResolver) {
+                const resolver = confirmResolver;
+                confirmResolver = null;
+                resolver(result);
+            }
+        }
+
+        elements.confirmCancelButton.addEventListener("click", () => {
+            closeConfirmation(false);
+        });
+
+        elements.confirmAcceptButton.addEventListener("click", () => {
+            closeConfirmation(true);
+        });
+
+        elements.confirmBackdrop.addEventListener("click", event => {
+            if (event.target === elements.confirmBackdrop) {
+                closeConfirmation(false);
+            }
+        });
+
+        /* بستن پنجره‌ها با کلید Escape */
+        document.addEventListener("keydown", event => {
+            if (event.key !== "Escape") return;
+
+            if (!elements.confirmBackdrop.classList.contains("hidden")) {
+                closeConfirmation(false);
+                return;
+            }
+
+            if (
+                !elements.settingsBackdrop.classList.contains("hidden") &&
+                currentSettings
+            ) {
+                closeSettings();
+            }
+        });
+
+        /* =========================================================
+           راه‌اندازی برنامه
+        ========================================================= */
+        function initializeApp() {
+            const today = getTodayJalali();
+            elements.todayDateText.textContent = today.formatted;
+
+            updateCharacterCounter();
+            updateDateMode();
+            updatePreview();
+            updateChannelDisplay();
+            renderHistory();
+
+            if (!currentSettings) {
+                openSettings(true);
+            }
+        }
+
+        initializeApp();
+    </script>
+</body>
+</html>
